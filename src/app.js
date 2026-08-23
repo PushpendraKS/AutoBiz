@@ -33,14 +33,13 @@ async function findFirestoreData(req, res, next) {
 
         if (!data.length) {
             return res.status(404).json({
-                message: 'No matching documents found.',
-                data: [],
+                message: 'Subscription Unavailable'
             });
         }
 
         const isActive = isPastOrToday(data[0].EndDate);
 
-        return res.json({ subscriptionStatus: isActive });
+        return res.status(200).json({ subscriptionStatus: isActive });
     } catch (error) {
         return next(error);
     }
